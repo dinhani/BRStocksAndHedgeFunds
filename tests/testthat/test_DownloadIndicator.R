@@ -1,4 +1,4 @@
-context("Download Indicator - CDI")
+context("Download Indicators")
 
 # data
 cdi.daily <- DownloadIndicatorCDIDaily()
