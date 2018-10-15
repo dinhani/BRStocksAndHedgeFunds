@@ -1,0 +1,13 @@
+Package: BRStocksAndHedgeFunds
+Title: Brazilizan Stock Prices and Hedge Funds
+Description: Download and process data for Brazilians stocks and hedge funds.
+Version: 1.0.0
+Imports: quantmod,
+    zoo
+Authors@R: person("Renato", "Dinhani", email = "renatodinhani@gmail.com", role = c("aut", "cre"))
+Depends: R (>= 3.5.0)
+Encoding: UTF-8
+License: GPL-3
+LazyData: true
+RoxygenNote: 6.1.0
+Suggests: testthat
