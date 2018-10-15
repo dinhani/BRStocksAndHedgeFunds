@@ -2,6 +2,12 @@
 
 export(DownloadIndicatorCDIDaily)
 export(DownloadIndicatorCDIMonthly)
+export(DownloadIndicatorIbovespaDaily)
+export(DownloadIndicatorIpcaAccumulated)
+export(DownloadIndicatorIpcaMonthly)
+export(DownloadIndicatorSelicDaily)
+export(DownloadIndicatorSelicMonthly)
+export(DownloadIndicatorTjlpMonthly)
 export(DownloadStockPrices)
 import(Quandl)
 import(quantmod)
