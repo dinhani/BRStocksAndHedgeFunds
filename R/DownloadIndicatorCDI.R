@@ -20,38 +20,38 @@
 #' @author Renato Dinhani
 DownloadIndicatorCDIDaily <- function() {
   # download data
-  cdi.data <- Quandl::Quandl("BCB/12")
+  cdi.data.df <- Quandl::Quandl("BCB/12")
 
   # rename data
-  colnames(cdi.data) <- c("Date", "Value")
+  colnames(cdi.data.df) <- c("Date", "Value")
 
   # enrich data
-  cdi.data$Indicator <- "CDI-Daily"
+  cdi.data.df$Indicator <- "CDI-Daily"
 
   # reorder data
-  cdi.data <- cdi.data[c("Indicator", "Date", "Value")]
-  cdi.data <- cdi.data[order(cdi.data$Date), ]
+  cdi.data.df <- cdi.data.df[c("Indicator", "Date", "Value")]
+  cdi.data.df <- cdi.data.df[order(cdi.data.df$Date), ]
 
   # return downloaded data
-  return(cdi.data)
+  return(cdi.data.df)
 }
 
 #' @rdname DownloadIndicatorCDIDaily
 #' @export
 DownloadIndicatorCDIMonthly <- function() {
   # download data
-  cdi.data <- Quandl::Quandl("BCB/4391")
+  cdi.data.df <- Quandl::Quandl("BCB/4391")
 
   # rename data
-  colnames(cdi.data) <- c("Date", "Value")
+  colnames(cdi.data.df) <- c("Date", "Value")
 
   # enrich data
-  cdi.data$Indicator <- "CDI-Monthly"
+  cdi.data.df$Indicator <- "CDI-Monthly"
 
   # reorder data
-  cdi.data <- cdi.data[c("Indicator", "Date", "Value")]
-  cdi.data <- cdi.data[order(cdi.data$Date), ]
+  cdi.data.df <- cdi.data.df[c("Indicator", "Date", "Value")]
+  cdi.data.df <- cdi.data.df[order(cdi.data.df$Date), ]
 
   # return downloaded data
-  return(cdi.data)
+  return(cdi.data.df)
 }

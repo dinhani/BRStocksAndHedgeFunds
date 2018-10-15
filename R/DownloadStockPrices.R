@@ -31,8 +31,8 @@ DownloadStockPrices <- function(ticker) {
   ticker.yahoo <- paste0(ticker, ".SA")
 
   # download data
-  ticker.data <- quantmod::getSymbols(ticker.yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
-  ticker.data.df <- data.frame(Ticker = ticker, Date = zoo::index(ticker.data), zoo::coredata(ticker.data), stringsAsFactors = FALSE)
+  ticker.data.xts <- quantmod::getSymbols(ticker.yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
+  ticker.data.df <- data.frame(Ticker = ticker, Date = zoo::index(ticker.data.xts), zoo::coredata(ticker.data.xts), stringsAsFactors = FALSE)
 
   # rename data
   colnames(ticker.data.df) <- c("Ticker", "Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
