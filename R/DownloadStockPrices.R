@@ -24,21 +24,23 @@
 #'
 #' @author Renato Dinhani
 DownloadStockPrices <- function(ticker) {
+  # validate input
   stopifnot(is.character(ticker))
 
   # generate Yahoo ticker for Brazilian stocks
   ticker.yahoo <- paste0(ticker, ".SA")
 
-  # download stock data
+  # download data
   ticker.data <- quantmod::getSymbols(ticker.yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
   ticker.data.df <- data.frame(Ticker = ticker, Date = zoo::index(ticker.data), zoo::coredata(ticker.data), stringsAsFactors = FALSE)
 
-  # rename downloaded data
+  # rename data
   colnames(ticker.data.df) <- c("Ticker", "Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
 
-  # reorder stock data columns
+  # reorder data
   ticker.data.df <- ticker.data.df[c("Ticker", "Date", "Open", "High", "Low", "Close", "Adjusted", "Volume")]
+  ticker.data.df <- ticker.data.df[order(ticker.data.df$Date), ]
 
-  # return downloaded data
+  # return data
   return(ticker.data.df)
 }
