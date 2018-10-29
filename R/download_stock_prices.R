@@ -20,10 +20,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' DownloadStockPrices("CIEL3")}
+#' download_stock_prices("CIEL3")}
 #'
 #' @author Renato Dinhani
-DownloadStockPrices <- function(ticker) {
+download_stock_prices <- function(ticker) {
   # validate input
   stopifnot(is.character(ticker))
 

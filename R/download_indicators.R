@@ -16,92 +16,92 @@
 #'
 #' @examples
 #' \dontrun{
-#' DownloadIndicatorCDIDaily()
-#' DownloadIndicatorCDIMonhtly()
-#' DownloadIndicatorIbovespaDaily()}
+#' download_indicator_cdi_daily()
+#' download_indicator_cdi_monhtly()
+#' download_indicator_ibovespa_daily()}
 #'
 #' @author Renato Dinhani
-DownloadIndicatorQuandl <- function(indicator.id, indicator.name = "") {
+download_indicator_quandl <- function(indicator.id, indicator.name = "") {
   # validate
   stopifnot(is.character(indicator.id))
   stopifnot(is.character(indicator.name))
 
   # download data
-  cdi.data.df <- Quandl::Quandl(indicator.id)
+  cdi_data_df <- Quandl::Quandl(indicator.id)
 
   # rename data
-  colnames(cdi.data.df) <- c("Date", "Value")
+  colnames(cdi_data_df) <- c("Date", "Value")
 
   # enrich data
-  cdi.data.df$Indicator <- indicator.name
+  cdi_data_df$Indicator <- indicator.name
 
   # reorder data
-  cdi.data.df <- cdi.data.df[c("Indicator", "Date", "Value")]
-  cdi.data.df <- cdi.data.df[order(cdi.data.df$Date), ]
+  cdi_data_df <- cdi_data_df[c("Indicator", "Date", "Value")]
+  cdi_data_df <- cdi_data_df[order(cdi_data_df$Date), ]
 
   # return downloaded data
-  return(cdi.data.df)
+  return(cdi_data_df)
 }
 
 # ==============================================================================
 # CDI
 # ==============================================================================
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorCDIDaily <- function() {
-  DownloadIndicatorQuandl("BCB/12", "CDI-Daily")
+download_indicator_cdi_daily <- function() {
+  download_indicator_quandl("BCB/12", "CDI-Daily")
 }
 
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorCDIMonthly <- function() {
-  DownloadIndicatorQuandl("BCB/4391", "CDI-Monthly")
+download_indicator_cdi_monthly <- function() {
+  download_indicator_quandl("BCB/4391", "CDI-Monthly")
 }
 
 # ==============================================================================
 # IBOVESPA
 # ==============================================================================
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorIbovespaDaily <- function() {
-  DownloadIndicatorQuandl("BCB/7", "IBOVESPA-Daily")
+download_indicator_ibovespa_daily <- function() {
+  download_indicator_quandl("BCB/7", "IBOVESPA-Daily")
 }
 
 # ==============================================================================
 # IPCA
 # ==============================================================================
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorIpcaAccumulated <- function() {
-  DownloadIndicatorQuandl("BCB/13522", "IPCA-Accumulated")
+download_indicator_ipca_accumulated <- function() {
+  download_indicator_quandl("BCB/13522", "IPCA-Accumulated")
 }
 
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorIpcaMonthly <- function() {
-  DownloadIndicatorQuandl("BCB/433", "IPCA-Monthly")
+download_indicator_ipca_monthly <- function() {
+  download_indicator_quandl("BCB/433", "IPCA-Monthly")
 }
 
 # ==============================================================================
 # SELIC
 # ==============================================================================
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorSelicDaily <- function() {
-  DownloadIndicatorQuandl("BCB/11", "SELIC-Daily")
+download_indicator_selic_daily <- function() {
+  download_indicator_quandl("BCB/11", "SELIC-Daily")
 }
 
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorSelicMonthly <- function() {
-  DownloadIndicatorQuandl("BCB/4390", "SELIC-Monthly")
+download_indicator_selic_monthly <- function() {
+  download_indicator_quandl("BCB/4390", "SELIC-Monthly")
 }
 
 # ==============================================================================
 # TJLP
 # ==============================================================================
-#' @rdname DownloadIndicatorQuandl
+#' @rdname download_indicator_quandl
 #' @export
-DownloadIndicatorTjlpMonthly <- function() {
-  DownloadIndicatorQuandl("BCB/7815", "TJLP-Monthly")
+download_indicator_tjlp_monthly <- function() {
+  download_indicator_quandl("BCB/7815", "TJLP-Monthly")
 }
