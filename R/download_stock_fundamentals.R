@@ -25,6 +25,9 @@
 #'
 #' @author Renato Dinhani
 download_stock_fundamentals <- function(ticker, folder = "temp") {
+  # validate
+  stopifnot(is.character(ticker))
+
   # create base folder
   ticker_folder <- paste0(folder, "/fundamentals/", ticker)
   dir.create(ticker_folder, recursive = TRUE, showWarnings = FALSE)

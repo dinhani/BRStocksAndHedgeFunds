@@ -35,7 +35,7 @@
 #'
 #' @author Renato Dinhani
 download_stock_prices <- function(ticker) {
-  # validate input
+  # validate
   stopifnot(is.character(ticker))
 
   # generate Yahoo ticker for Brazilian stocks
