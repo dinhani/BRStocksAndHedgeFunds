@@ -2,6 +2,8 @@
 #'
 #' Download daily and monthly values of several Brazilian economic indicators.
 #'
+#' @import Quandl
+#'
 #' @param indicator.name Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.
 #' @param indicator.id Chracter. The Quandl unique ID of the desired indicator.
 #'
@@ -11,8 +13,6 @@
 #' \item Date
 #' \item Value (percentage)
 #' }
-#'
-#' @import Quandl
 #'
 #' @examples
 #' \dontrun{
