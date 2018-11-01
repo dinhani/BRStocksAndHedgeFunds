@@ -2,7 +2,12 @@
 #'
 #' Download daily prices of stocks listed in the Brazilian stock market.
 #'
+#' @export
+#'
+#' @import quantmod
+#'
 #' @param ticker Character. The ticker of a brazilian stock to download its daily prices.
+#'
 #' @return A data.frame containing:
 #' \itemize{
 #' \item Ticker
@@ -15,9 +20,6 @@
 #' \item Volume
 #' }
 #'
-#' @import quantmod
-#' @export
-#'
 #' @examples
 #' \dontrun{
 #' download_stock_prices("CIEL3")}
@@ -28,19 +30,19 @@ download_stock_prices <- function(ticker) {
   stopifnot(is.character(ticker))
 
   # generate Yahoo ticker for Brazilian stocks
-  ticker.yahoo <- paste0(ticker, ".SA")
+  ticker_yahoo <- paste0(ticker, ".SA")
 
   # download data
-  ticker.data.xts <- quantmod::getSymbols(ticker.yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
-  ticker.data.df <- data.frame(Ticker = ticker, Date = zoo::index(ticker.data.xts), zoo::coredata(ticker.data.xts), stringsAsFactors = FALSE)
+  ticker_data_xts <- quantmod::getSymbols(ticker_yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
+  ticker_data_df <- data.frame(Ticker = ticker, Date = zoo::index(ticker_data_xts), zoo::coredata(ticker_data_xts), stringsAsFactors = FALSE)
 
   # rename data
-  colnames(ticker.data.df) <- c("Ticker", "Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
+  colnames(ticker_data_df) <- c("Ticker", "Date", "Open", "High", "Low", "Close", "Volume", "Adjusted")
 
   # reorder data
-  ticker.data.df <- ticker.data.df[c("Ticker", "Date", "Open", "High", "Low", "Close", "Adjusted", "Volume")]
-  ticker.data.df <- ticker.data.df[order(ticker.data.df$Date), ]
+  ticker_data_df <- ticker_data_df[c("Ticker", "Date", "Open", "High", "Low", "Close", "Adjusted", "Volume")]
+  ticker_data_df <- ticker_data_df[order(ticker_data_df$Date), ]
 
   # return data
-  return(ticker.data.df)
+  return(ticker_data_df)
 }
