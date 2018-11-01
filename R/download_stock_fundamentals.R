@@ -40,7 +40,7 @@ download_stock_fundamentals <- function(ticker, folder = "temp") {
   httr::GET(ticker_fundamentals_url, httr::write_disk(ticker_fundamentals_zip, overwrite = TRUE))
 
   # unzip fundamentals
-  unzip(ticker_fundamentals_zip, files = "balanco.xls", exdir = ticker_folder, overwrite = TRUE)
+  utils::unzip(ticker_fundamentals_zip, files = "balanco.xls", exdir = ticker_folder, overwrite = TRUE)
 
   # rename fundamentals
   ticker_fundamentals_zip_xls <- paste0(ticker_folder, "/balanco.xls")
@@ -65,7 +65,7 @@ read_excel <- function(excel_file, excel_sheet) {
 
   # convert pandas to R data.frame using CSV as intermediary
   pandas_csv <- reticulate::py_to_r(pandas_df$to_csv())
-  r_df <- read.csv(textConnection(pandas_csv))
+  r_df <- utils::read.csv(textConnection(pandas_csv))
 
   # format columns
   colnames(r_df)[1] <- "Date"
