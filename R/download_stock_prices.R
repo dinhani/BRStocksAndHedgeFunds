@@ -54,7 +54,7 @@ download_stock_prices <- function(ticker) {
   ticker_data_df$PctChange <- ticker_data_df$Adjusted / dplyr::lag(ticker_data_df$Adjusted, 1) - 1
 
   # reorder columns
-  ticker_data_df <- ticker_data_df[c("Ticker", "Date", "StartDate", "Year", "Quarter", "Month", "Day", "Weekday", "Open", "High", "Low", "Close", "Adjusted", "PctChange", "Volume")]
+  ticker_data_df <- ticker_data_df[c("Ticker", "Date", "StartDate", "Open", "High", "Low", "Close", "Adjusted", "PctChange", "Volume")]
 
   # return data
   return(ticker_data_df)

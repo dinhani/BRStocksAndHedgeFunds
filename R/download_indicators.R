@@ -51,7 +51,7 @@ download_indicator_quandl <- function(indicator_id, indicator_name = "", is_perc
   }
 
   # reorder columns
-  indicator_data_df <- indicator_data_df[c("Indicator", "Date", "StartDate", "Year", "Quarter", "Month", "Day", "Weekday", "Value", "PctChange")]
+  indicator_data_df <- indicator_data_df[c("Indicator", "Date", "StartDate", "Value", "PctChange")]
 
   # return downloaded data
   return(indicator_data_df)
