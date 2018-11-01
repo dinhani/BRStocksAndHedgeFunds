@@ -51,24 +51,25 @@ download_stock_fundamentals <- function(ticker, folder = "temp/fundamentals/") {
   file.rename(ticker_fundamentals_zip_xls, ticker_fundamentals_xls)
 
   # parse fundamentals from excel file
-  ticker_balance <- read_excel(ticker_fundamentals_xls, 0L)
-  ticker_income <- read_excel(ticker_fundamentals_xls, 1L)
+  ticker_balance <- read_excel(ticker, ticker_fundamentals_xls, 0L)
+  ticker_income <- read_excel(ticker, ticker_fundamentals_xls, 1L)
 
   # generate result list
   list(ticker = ticker, filename = ticker_fundamentals_xls, balance = ticker_balance, income = ticker_income)
 }
 
-read_excel <- function(excel_file, excel_sheet) {
+read_excel <- function(ticker, excel_file, excel_sheet) {
   # import pandas
   pandas <- reticulate::import("pandas", convert = FALSE)
 
   # read excel file using pandas
   pandas_df <- pandas$read_excel(excel_file, sheet_name = excel_sheet, index_col = 0L, skiprows = 1L)
   pandas_df <- pandas_df$transpose()
+  pandas_df$insert(0L, "Ticker", ticker)
 
   # convert pandas to R data.frame using CSV as intermediary
   pandas_csv <- reticulate::py_to_r(pandas_df$to_csv())
-  r_df <- utils::read.csv(textConnection(pandas_csv))
+  r_df <- utils::read.csv(textConnection(pandas_csv), stringsAsFactors = FALSE)
 
   # format columns
   colnames(r_df)[1] <- "Date"
