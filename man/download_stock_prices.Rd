@@ -14,11 +14,18 @@ A data.frame containing:
 \itemize{
 \item Ticker
 \item Date
+\item StartDate
+\item Year
+\item Quarter
+\item Month
+\item Day
+\item Weekday
 \item Open
 \item High
 \item Low
 \item Close
 \item Adjusted (Adjusted Close)
+\item PctChange (based on Adjusted)
 \item Volume
 }
 }

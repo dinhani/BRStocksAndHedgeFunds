@@ -40,7 +40,14 @@ A data.frame containing:
 \itemize{
 \item Indicator (indicator name)
 \item Date
-\item Value (percentage)
+\item StartDate
+\item Year
+\item Quarter
+\item Month
+\item Day
+\item Weekday
+\item Value
+\item PctChange (based on Value)
 }
 }
 \description{

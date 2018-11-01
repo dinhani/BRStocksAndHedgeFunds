@@ -2,7 +2,8 @@ Package: BRStocksAndHedgeFunds
 Title: Brazilizan Stock Prices and Hedge Funds
 Description: Download and process data for Brazilians stocks and hedge funds.
 Version: 1.0.0
-Imports: httr,
+Imports: dplyr,
+    httr,
     lubridate,
     Quandl,
     quantmod,

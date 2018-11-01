@@ -2,6 +2,8 @@
 #'
 #' Download daily and monthly values of several Brazilian economic indicators.
 #'
+#' @importFrom dplyr lag
+#' @importFrom lubridate year quarter month day wday
 #' @import Quandl
 #'
 #' @param indicator.name Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.
@@ -11,7 +13,14 @@
 #' \itemize{
 #' \item Indicator (indicator name)
 #' \item Date
-#' \item Value (percentage)
+#' \item StartDate
+#' \item Year
+#' \item Quarter
+#' \item Month
+#' \item Day
+#' \item Weekday
+#' \item Value
+#' \item PctChange (based on Value)
 #' }
 #'
 #' @examples
@@ -26,21 +35,30 @@ download_indicator_quandl <- function(indicator.id, indicator.name = "") {
   stopifnot(is.character(indicator.id))
   stopifnot(is.character(indicator.name))
 
-  # download data
-  cdi_data_df <- Quandl::Quandl(indicator.id)
+  # download
+  indicator_data_df <- Quandl::Quandl(indicator.id)
 
-  # rename data
-  colnames(cdi_data_df) <- c("Date", "Value")
+  # rename columns
+  colnames(indicator_data_df) <- c("Date", "Value")
 
-  # enrich data
-  cdi_data_df$Indicator <- indicator.name
+  # reorder rows
+  indicator_data_df <- indicator_data_df[order(indicator_data_df$Date), ]
 
-  # reorder data
-  cdi_data_df <- cdi_data_df[c("Indicator", "Date", "Value")]
-  cdi_data_df <- cdi_data_df[order(cdi_data_df$Date), ]
+  # enhance
+  indicator_data_df$Indicator <- indicator.name
+  indicator_data_df$StartDate <- min(indicator_data_df$Date)
+  indicator_data_df$Year <- lubridate::year(indicator_data_df$Date)
+  indicator_data_df$Quarter <- lubridate::quarter(indicator_data_df$Date)
+  indicator_data_df$Month <- lubridate::month(indicator_data_df$Date)
+  indicator_data_df$Day <- lubridate::day(indicator_data_df$Date)
+  indicator_data_df$Weekday <- lubridate::wday(indicator_data_df$Date)
+  indicator_data_df$PctChange <- indicator_data_df$Value / dplyr::lag(indicator_data_df$Value, 1) - 1
+
+  # reorder columns
+  indicator_data_df <- indicator_data_df[c("Indicator", "Date", "StartDate", "Year", "Quarter", "Month", "Day", "Weekday", "Value", "PctChange")]
 
   # return downloaded data
-  return(cdi_data_df)
+  return(indicator_data_df)
 }
 
 # ==============================================================================
