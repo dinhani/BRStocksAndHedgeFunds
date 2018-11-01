@@ -12,7 +12,8 @@
 \alias{download_indicator_tjlp_monthly}
 \title{Download Indicators}
 \usage{
-download_indicator_quandl(indicator.id, indicator.name = "")
+download_indicator_quandl(indicator_id, indicator_name = "",
+  is_percentage = TRUE)
 
 download_indicator_cdi_daily()
 
@@ -31,9 +32,11 @@ download_indicator_selic_monthly()
 download_indicator_tjlp_monthly()
 }
 \arguments{
-\item{indicator.id}{Chracter. The Quandl unique ID of the desired indicator.}
+\item{indicator_id}{Chracter. The Quandl unique ID of the desired indicator.}
 
-\item{indicator.name}{Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.}
+\item{indicator_name}{Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.}
+
+\item{is_percentage}{Boolean. Indicates if expected values are represing percentages. Necessary to fix Value column because Quandl does not represents percentages property. Defaults to true.}
 }
 \value{
 A data.frame containing:
