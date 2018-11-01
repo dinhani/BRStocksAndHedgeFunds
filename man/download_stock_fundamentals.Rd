@@ -4,7 +4,7 @@
 \alias{download_stock_fundamentals}
 \title{Download Stock Fundamentals}
 \usage{
-download_stock_fundamentals(ticker, folder = "temp")
+download_stock_fundamentals(ticker, folder = "temp/fundamentals/")
 }
 \arguments{
 \item{ticker}{Character. The ticker of a brazilian stock to download its fundamentals.}

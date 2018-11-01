@@ -24,12 +24,12 @@
 #' download_stock_fundamentals("CIEL3")}
 #'
 #' @author Renato Dinhani
-download_stock_fundamentals <- function(ticker, folder = "temp") {
+download_stock_fundamentals <- function(ticker, folder = "temp/fundamentals/") {
   # validate
   stopifnot(is.character(ticker))
 
   # create base folder
-  ticker_folder <- paste0(folder, "/fundamentals/", ticker)
+  ticker_folder <- paste0(folder, "/", ticker)
   dir.create(ticker_folder, recursive = TRUE, showWarnings = FALSE)
 
   # get SID to download fundamentals
