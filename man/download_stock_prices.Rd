@@ -15,11 +15,6 @@ A data.frame containing:
 \item Ticker
 \item Date
 \item StartDate
-\item Year
-\item Quarter
-\item Month
-\item Day
-\item Weekday
 \item Open
 \item High
 \item Low

@@ -44,11 +44,6 @@ A data.frame containing:
 \item Indicator (indicator name)
 \item Date
 \item StartDate
-\item Year
-\item Quarter
-\item Month
-\item Day
-\item Weekday
 \item Value
 \item PctChange (based on Value)
 }

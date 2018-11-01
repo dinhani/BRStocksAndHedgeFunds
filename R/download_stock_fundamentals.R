@@ -71,11 +71,12 @@ read_excel <- function(ticker, excel_file, excel_sheet) {
   pandas_csv <- reticulate::py_to_r(pandas_df$to_csv())
   r_df <- utils::read.csv(textConnection(pandas_csv), stringsAsFactors = FALSE)
 
-  # format columns
+  # enhance columns
   colnames(r_df)[1] <- "Date"
   r_df$Date <- lubridate::dmy(r_df$Date)
+  r_df$StartDate <- min(r_df$Date)
 
-  # sort dataframe
+  # order rows
   r_df <- r_df[order(r_df$Date), ]
 
   # return r dataframe

@@ -15,11 +15,6 @@
 #' \item Indicator (indicator name)
 #' \item Date
 #' \item StartDate
-#' \item Year
-#' \item Quarter
-#' \item Month
-#' \item Day
-#' \item Weekday
 #' \item Value
 #' \item PctChange (based on Value)
 #' }
@@ -49,11 +44,6 @@ download_indicator_quandl <- function(indicator_id, indicator_name = "", is_perc
   # enhance
   indicator_data_df$Indicator <- indicator_name
   indicator_data_df$StartDate <- min(indicator_data_df$Date)
-  indicator_data_df$Year <- lubridate::year(indicator_data_df$Date)
-  indicator_data_df$Quarter <- lubridate::quarter(indicator_data_df$Date)
-  indicator_data_df$Month <- lubridate::month(indicator_data_df$Date)
-  indicator_data_df$Day <- lubridate::day(indicator_data_df$Date)
-  indicator_data_df$Weekday <- lubridate::wday(indicator_data_df$Date)
   indicator_data_df$PctChange <- indicator_data_df$Value / dplyr::lag(indicator_data_df$Value, 1) - 1
 
   if (is_percentage) {
