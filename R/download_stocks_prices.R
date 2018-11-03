@@ -6,9 +6,9 @@
 #'
 #' @importFrom dplyr lag
 #' @importFrom lubridate year quarter month day wday
-#' @import quantmod
+#' @importFrom quantmod getSymbols
 #'
-#' @param ticker Character. The ticker of a brazilian stock to download its daily prices.
+#' @param tickers Character. Tickers of one or more brazilian stocks to download its daily prices.
 #'
 #' @return A data.frame containing:
 #' \itemize{
@@ -26,10 +26,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' download_stock_prices("CIEL3")}
+#' download_stocks_prices("CIEL3")}
 #'
 #' @author Renato Dinhani
-download_stock_prices <- function(ticker) {
+download_stocks_prices <- function(tickers) {
+  purrr::map_dfr(tickers, download_stocks_price)
+}
+
+download_stocks_price <- function(ticker) {
   # validate
   stopifnot(is.character(ticker))
 
@@ -50,7 +54,7 @@ download_stock_prices <- function(ticker) {
   ticker_data_df <- ticker_data_df[order(ticker_data_df$Date), ]
 
   # enhance
-  ticker_data_df$StartDate <- min(ticker_data_df$Date)
+  ticker_data_df$StartDate <- min(ticker_data_df$Date, na.rm = TRUE)
   ticker_data_df$PctChange <- ticker_data_df$Adjusted / dplyr::lag(ticker_data_df$Adjusted, 1) - 1
 
   # reorder columns

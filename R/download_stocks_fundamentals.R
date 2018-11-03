@@ -4,12 +4,13 @@
 #'
 #' @export
 #'
-#' @import httr
-#' @import lubridate
-#' @import reticulate
+#' @importFrom httr GET write_disk
+#' @importFrom lubridate dmy
+#' @importFrom purrr map_dfr
+#' @importFrom reticulate import py_to_r
 #'
-#' @param ticker Character. The ticker of a brazilian stock to download its fundamentals.
-#' @param folder Character. A path to a folder where the downloaded data (ZIP file and Excel sheet) will be stored.
+#' @param tickers Character. Tickers of one or more brazilian stocks to download its fundamentals.
+#' @param folder Character. Path to a folder where the downloaded data (ZIP file and Excel sheet) will be stored.
 #'
 #' @return A list containing:
 #' \itemize{
@@ -21,10 +22,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' download_stock_fundamentals("CIEL3")}
+#' download_stocks_fundamentals("CIEL3")}
 #'
 #' @author Renato Dinhani
-download_stock_fundamentals <- function(ticker, folder = "temp/fundamentals/") {
+download_stocks_fundamentals <- function(tickers, folder = "temp/stocks/fundamentals/") {
+  purrr::map_dfr(tickers, download_stock_fundamentals, folder = folder)
+}
+
+download_stock_fundamentals <- function(ticker, folder = "temp/stocks/fundamentals/") {
   # validate
   stopifnot(is.character(ticker))
 
@@ -55,7 +60,7 @@ download_stock_fundamentals <- function(ticker, folder = "temp/fundamentals/") {
   ticker_income <- read_excel(ticker, ticker_fundamentals_xls, 1L)
 
   # generate result list
-  list(ticker = ticker, filename = ticker_fundamentals_xls, balance = ticker_balance, income = ticker_income)
+  cbind(ticker_balance, ticker_income)
 }
 
 read_excel <- function(ticker, excel_file, excel_sheet) {
@@ -74,7 +79,7 @@ read_excel <- function(ticker, excel_file, excel_sheet) {
   # enhance columns
   colnames(r_df)[1] <- "Date"
   r_df$Date <- lubridate::dmy(r_df$Date)
-  r_df$StartDate <- min(r_df$Date)
+  r_df$StartDate <- min(r_df$Date, na.rm = TRUE)
 
   # order rows
   r_df <- r_df[order(r_df$Date), ]

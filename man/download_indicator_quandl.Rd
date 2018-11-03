@@ -32,9 +32,9 @@ download_indicator_selic_monthly()
 download_indicator_tjlp_monthly()
 }
 \arguments{
-\item{indicator_id}{Chracter. The Quandl unique ID of the desired indicator.}
+\item{indicator_id}{Chracter. Quandl unique ID of the desired indicator.}
 
-\item{indicator_name}{Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.}
+\item{indicator_name}{Character. Indicator name in a human readable format. Serves only to identify the indicator in the returned data.frame.}
 
 \item{is_percentage}{Boolean. Indicates if expected values are represing percentages. Necessary to fix Value column because Quandl does not represents percentages property. Defaults to true.}
 }

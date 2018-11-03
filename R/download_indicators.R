@@ -4,10 +4,10 @@
 #'
 #' @importFrom dplyr lag
 #' @importFrom lubridate year quarter month day wday
-#' @import Quandl
+#' @importFrom Quandl Quandl
 #'
-#' @param indicator_name Character. The indicator in a human readable format. Serves only to identify the indicator in the returned data.frame.
-#' @param indicator_id Chracter. The Quandl unique ID of the desired indicator.
+#' @param indicator_name Character. Indicator name in a human readable format. Serves only to identify the indicator in the returned data.frame.
+#' @param indicator_id Chracter. Quandl unique ID of the desired indicator.
 #' @param is_percentage Boolean. Indicates if expected values are represing percentages. Necessary to fix Value column because Quandl does not represents percentages property. Defaults to true.
 #'
 #' @return A data.frame containing:
@@ -43,7 +43,7 @@ download_indicator_quandl <- function(indicator_id, indicator_name = "", is_perc
 
   # enhance
   indicator_data_df$Indicator <- indicator_name
-  indicator_data_df$StartDate <- min(indicator_data_df$Date)
+  indicator_data_df$StartDate <- min(indicator_data_df$Date, na.rm = TRUE)
   indicator_data_df$PctChange <- indicator_data_df$Value / dplyr::lag(indicator_data_df$Value, 1) - 1
 
   if (is_percentage) {
