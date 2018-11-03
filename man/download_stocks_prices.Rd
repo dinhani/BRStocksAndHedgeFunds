@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_stocks_prices.R
 \name{download_stocks_prices}
 \alias{download_stocks_prices}
-\title{Download Stock Prices}
+\title{Download Stocks Prices}
 \usage{
 download_stocks_prices(tickers)
 }

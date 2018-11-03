@@ -1,4 +1,4 @@
-#' Download Stock Fundamentals
+#' Download Stocks Fundamentals
 #'
 #' Download balance sheet and income statement from stocks listed in the Brazilian stock market.
 #'
@@ -12,13 +12,7 @@
 #' @param tickers Character. Tickers of one or more brazilian stocks to download its fundamentals.
 #' @param folder Character. Path to a folder where the downloaded data (ZIP file and Excel sheet) will be stored.
 #'
-#' @return A list containing:
-#' \itemize{
-#' \item ticker: Character. Ticker passed as parameter to this function.
-#' \item filename: Character. Path to the downloaded Excel file containing the balance sheet and income statement.
-#' \item balance: DataFrame. Balance sheet parsed from the downloaded Excel file.
-#' \item income: DataFrame. Income statement parsed from the downloaded Excel file.
-#' }
+#' @return A data.frame containing data from the balance sheet and income statement.
 #'
 #' @examples
 #' \dontrun{

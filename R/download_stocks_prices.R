@@ -1,4 +1,4 @@
-#' Download Stock Prices
+#' Download Stocks Prices
 #'
 #' Download daily prices of stocks listed in the Brazilian stock market.
 #'
