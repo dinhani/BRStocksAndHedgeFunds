@@ -53,6 +53,9 @@ download_stocks_price <- function(ticker) {
   # reorder rows
   ticker_data_df <- ticker_data_df[order(ticker_data_df$Date), ]
 
+  # remove duplicates
+  ticker_data_df <- unique(ticker_data_df)
+
   # enhance
   ticker_data_df$StartDate <- min(ticker_data_df$Date, na.rm = TRUE)
   ticker_data_df$PctChange <- ticker_data_df$Adjusted / dplyr::lag(ticker_data_df$Adjusted, 1) - 1
