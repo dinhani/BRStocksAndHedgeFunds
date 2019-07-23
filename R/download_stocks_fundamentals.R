@@ -53,8 +53,8 @@ download_stock_fundamentals <- function(ticker, folder = "temp/stocks/fundamenta
   ticker_balance <- read_excel(ticker, ticker_fundamentals_xls, 0L)
   ticker_income <- read_excel(ticker, ticker_fundamentals_xls, 1L)
 
-  # generate result list
-  cbind(ticker_balance, ticker_income)
+  # generate merged data frame of balance and income
+  merge(ticker_balance, ticker_income, by = "Date", all.x = T)
 }
 
 read_excel <- function(ticker, excel_file, excel_sheet) {
