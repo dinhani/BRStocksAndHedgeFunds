@@ -29,11 +29,11 @@
 #' download_stocks_prices("CIEL3")}
 #'
 #' @author Renato Dinhani
-download_stocks_prices <- function(tickers) {
-  purrr::map_dfr(tickers, download_stocks_price)
+download_stocks_prices <- function(tickers, ...) {
+  purrr::map_dfr(tickers, download_stocks_price, ...)
 }
 
-download_stocks_price <- function(ticker) {
+download_stocks_price <- function(ticker, ...) {
   # validate
   stopifnot(is.character(ticker))
 
@@ -41,7 +41,7 @@ download_stocks_price <- function(ticker) {
   ticker_yahoo <- paste0(ticker, ".SA")
 
   # download
-  ticker_data_xts <- quantmod::getSymbols(ticker_yahoo, src = "yahoo", auto.assign = FALSE, warnings = FALSE)
+  ticker_data_xts <- quantmod::getSymbols(ticker_yahoo, auto.assign = FALSE, warnings = FALSE, ...)
   ticker_data_df <- data.frame(Ticker = ticker, Date = zoo::index(ticker_data_xts), zoo::coredata(ticker_data_xts), stringsAsFactors = FALSE)
 
   # remove rows with NA values
