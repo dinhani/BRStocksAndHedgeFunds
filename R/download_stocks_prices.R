@@ -38,7 +38,12 @@ download_stocks_price <- function(ticker, ...) {
   stopifnot(is.character(ticker))
 
   # generate Yahoo ticker for Brazilian stocks
-  ticker_yahoo <- paste0(ticker, ".SA")
+  # do not modify ticker for indices (eg.: ^BVSP)
+  if(startsWith(ticker, "^")) {
+    ticker_yahoo <- ticker
+  } else {
+    ticker_yahoo <- paste0(ticker, ".SA")
+  }  
 
   # download
   ticker_data_xts <- quantmod::getSymbols(ticker_yahoo, auto.assign = FALSE, warnings = FALSE, ...)
