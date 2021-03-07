@@ -34,7 +34,7 @@ download_stock_fundamentals <- function(ticker, folder = "temp/stocks/fundamenta
   # get SID to download fundamentals
   ticker_sid_url <- paste0("http://fundamentus.com.br/balancos.php?papel=", ticker, "&tipo=1")
   ticker_sid_response <- httr::GET(ticker_sid_url)
-  ticker_sid <- ticker_sid_response$cookies$value
+  ticker_sid <- ticker_sid_response$cookies$value[2]
 
   # download fundamentals
   ticker_fundamentals_url <- paste0("http://fundamentus.com.br/planilhas.php?SID=", ticker_sid)
